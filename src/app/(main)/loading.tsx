@@ -6,7 +6,7 @@ export default function Loading() {
       <div className="flex flex-col items-center gap-2">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
         <p className="text-sm font-medium text-muted-foreground animate-pulse">
-          جاري التحميل...
+          Loading...
         </p>
       </div>
     </div>

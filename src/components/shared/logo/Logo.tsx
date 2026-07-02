@@ -14,7 +14,7 @@ export function Logo({
     width = 140,
     height = 40,
     className,
-    alt = "لوحة التحكم",
+    alt = "Starter Dash",
 }: LogoProps) {
     return (
         <Link href="/"

@@ -187,12 +187,12 @@ export function ImageUploader({
       );
 
       const messages: Record<RejectReason, (n: number) => string> = {
-        type: (n) => `تم تخطي ${n} ${n > 1 ? "ملفات" : "ملف"} — نوع غير مدعوم`,
+        type: (n) => `${n} file${n > 1 ? "s" : ""} skipped — unsupported type`,
         size: (n) =>
-          `تم تخطي ${n} ${n > 1 ? "ملفات" : "ملف"} — أكبر من ${formatBytes(maxSize)}`,
-        duplicate: (n) => `تم تخطي ${n} ${n > 1 ? "ملفات مكررة" : "ملف مكرر"}`,
+          `${n} file${n > 1 ? "s" : ""} skipped — larger than ${formatBytes(maxSize)}`,
+        duplicate: (n) => `${n} duplicate file${n > 1 ? "s" : ""} skipped`,
         max: (n) =>
-          `تم تخطي ${n} ${n > 1 ? "ملفات" : "ملف"} — تم الوصول للحد ${maxImages}`,
+          `${n} file${n > 1 ? "s" : ""} skipped — limit of ${maxImages} reached`,
       };
 
       (Object.keys(counts) as RejectReason[]).forEach((reason) => {
@@ -324,7 +324,7 @@ export function ImageUploader({
           <div
             role="button"
             tabIndex={0}
-            aria-label="رفع الصور"
+            aria-label="Upload images"
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
             onDragOver={handleDragOver}
@@ -369,21 +369,21 @@ export function ImageUploader({
             <div className="space-y-1">
               <p className="text-sm font-medium text-foreground">
                 {isDragging ? (
-                  "أفلت الصور هنا"
+                  "Drop images here"
                 ) : label ? (
                   label
                 ) : (
                   <>
                     <span className="text-primary underline-offset-2 hover:underline">
-                      انقر للرفع
+                      Click to upload
                     </span>
-                    {" "}أو اسحب وأفلت
+                    {" "}or drag &amp; drop
                   </>
                 )}
               </p>
               <p className="text-xs text-muted-foreground">
                 {hint ??
-                  `حتى ${maxImages} ${maxImages !== 1 ? "صور" : "صورة"} · بحد أقصى ${formatBytes(maxSize)} لكل صورة`}
+                  `Up to ${maxImages} image${maxImages !== 1 ? "s" : ""} · max ${formatBytes(maxSize)} each`}
               </p>
             </div>
 
@@ -430,7 +430,7 @@ export function ImageUploader({
                 type="button"
                 onClick={openPicker}
                 disabled={disabled}
-                aria-label="إضافة المزيد من الصور"
+                aria-label="Add more images"
                 style={{ aspectRatio }}
                 className={cn(
                   "group flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-muted/20 text-muted-foreground transition-all duration-200 hover:border-primary/50 hover:bg-primary/5 hover:text-primary",
@@ -440,7 +440,7 @@ export function ImageUploader({
                 <div className="flex size-9 items-center justify-center rounded-full border border-dashed border-current transition-transform duration-200 group-hover:scale-110">
                   <span className="text-lg leading-none select-none">+</span>
                 </div>
-                <span className="text-[11px] font-medium">إضافة المزيد</span>
+                <span className="text-[11px] font-medium">Add more</span>
               </button>
             )}
           </div>
@@ -452,7 +452,7 @@ export function ImageUploader({
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <ImageIcon className="size-3" />
             {images.length} / {maxImages}
-            {isFull && <span>· تم الوصول للحد</span>}
+            {isFull && <span>· limit reached</span>}
           </div>
         )}
       </div>
@@ -505,7 +505,7 @@ function Thumbnail({
         <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/0 opacity-0 transition-all duration-200 group-hover/thumb:bg-black/40 group-hover/thumb:opacity-100">
           <ActionButton
             onClick={(e) => { e.stopPropagation(); onZoom(); }}
-            aria-label="معاينة الصورة"
+            aria-label="Preview image"
             className="bg-white/90 text-foreground hover:bg-white"
           >
             <ZoomInIcon className="size-3.5" />
@@ -514,7 +514,7 @@ function Thumbnail({
           {!disabled && (
             <ActionButton
               onClick={(e) => { e.stopPropagation(); onRemove(); }}
-              aria-label="إزالة الصورة"
+              aria-label="Remove image"
               className="bg-destructive/90 text-white hover:bg-destructive"
             >
               <XIcon className="size-3.5" />
@@ -524,7 +524,7 @@ function Thumbnail({
 
         {/* done badge */}
         {img.status === "done" && (
-          <div className="absolute top-1.5 start-1.5 flex size-5 items-center justify-center rounded-full bg-emerald-500 text-white shadow">
+          <div className="absolute top-1.5 left-1.5 flex size-5 items-center justify-center rounded-full bg-emerald-500 text-white shadow">
             <CheckCircle2Icon className="size-3" />
           </div>
         )}
@@ -599,7 +599,7 @@ function Lightbox({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="معاينة الصورة"
+      aria-label="Image preview"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={onClose}
     >
@@ -607,9 +607,9 @@ function Lightbox({
         ref={closeRef}
         variant="ghost"
         size="icon"
-        className="absolute top-4 end-4 text-white hover:bg-white/10"
+        className="absolute top-4 right-4 text-white hover:bg-white/10"
         onClick={onClose}
-        aria-label="إغلاق المعاينة"
+        aria-label="Close preview"
       >
         <XIcon className="size-5" />
       </Button>

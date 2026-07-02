@@ -5,6 +5,7 @@ import {
   type LucideIcon,
   PencilRuler,
   Filter,
+  Table,
 } from "lucide-react";
 
 export type NavSubItem = {
@@ -29,37 +30,51 @@ export const navigation: NavGroup[] = [
     items: [
       {
         title: "لوحة التحكم",
-        url: "/dashboard",
+        url: "/",
         icon: LayoutDashboard,
       },
       {
-        title: "المرفقات (Forms)",
+        title: "النماذج",
         url: "/forms",
         icon: PencilRuler,
         items: [
           { title: "محرر النصوص", url: "/forms/rich-text" },
-          { title: "مرفق الصور", url: "/forms/image-uploader" },
-          { title: "مرفق الملفات", url: "/forms/file-uploader" },
+          { title: "رفع الصور", url: "/forms/image-uploader" },
+          { title: "رفع الملفات", url: "/forms/file-uploader" },
         ],
       },
       {
-        title: "الفلاتر (Filters)",
+        title: "الفلاتر",
         url: "/filters",
         icon: Filter,
         items: [
           { title: "ترقيم الصفحات", url: "/filters/pagination" },
           { title: "فلتر الاختيار", url: "/filters/select" },
+          { title: "فلتر البحث", url: "/filters/search" },
+          { title: "فلتر الحد", url: "/filters/limit" },
+          { title: "إعادة تعيين الفلاتر", url: "/filters/reset" },
         ],
       },
       {
-        title: "التحليلات (Analytics)",
-        url: "/dashboard/analytics",
+        title: "الرسوم البيانية",
+        url: "/charts",
         icon: BarChart,
+        items: [
+          { title: "رسوم التحليلات", url: "/charts/analytics" },
+        ],
       },
       {
-        title: "الإعدادات (Settings)",
-        url: "/dashboard/settings",
+        title: "الجدول",
+        url: "/table",
+        icon: Table,
+      },
+      {
+        title: "الإعدادات",
+        url: "/settings",
         icon: Settings,
+        items: [
+          { title: "ألوان الوضع الداكن", url: "/settings/dark-theme" },
+        ],
       },
     ],
   },

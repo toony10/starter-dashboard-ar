@@ -200,7 +200,7 @@ function mergeIncomingFiles(
             id: uid(),
             file,
             status: sizeOk ? "idle" : "error",
-            error: sizeOk ? undefined : `يتجاوز ${ formatBytes(maxSize) }`,
+            error: sizeOk ? undefined : `Exceeds ${ formatBytes(maxSize) }`,
         });
     }
 
@@ -264,7 +264,7 @@ export function FileUploader({
             });
 
             if (result.typeRejected) {
-                setTypeRejection("النوع غير مسموح");
+                setTypeRejection("The type not allowed");
             } else if (result.added) {
                 setTypeRejection(null);
             }
@@ -329,7 +329,7 @@ export function FileUploader({
                 <div
                     role="button"
                     tabIndex={ 0 }
-                    aria-label={ ariaLabel ?? "رفع الملفات" }
+                    aria-label={ ariaLabel ?? "Upload files" }
                     onDragEnter={ handleDragEnter }
                     onDragLeave={ handleDragLeave }
                     onDragOver={ handleDragOver }
@@ -385,21 +385,21 @@ export function FileUploader({
                     <div className="relative space-y-1.5">
                         <p className="text-sm font-medium text-foreground">
                             { isDragging ? (
-                                "أفلت الملفات هنا"
+                                "Drop files here"
                             ) : label ? (
                                 label
                             ) : (
                                 <>
                                     <span className="text-primary underline-offset-2 hover:underline">
-                                        انقر للتصفح
+                                        Click to browse
                                     </span>{ " " }
-                                    أو اسحب وأفلت
+                                    or drag &amp; drop
                                 </>
                             ) }
                         </p>
                         <p className="text-xs text-muted-foreground">
                             { hint ??
-                                `PDF وWord وExcel والمزيد · حتى ${ maxFiles } ${ maxFiles !== 1 ? "ملفات" : "ملف" } · بحد أقصى ${ formatBytes(maxSize) } لكل ملف` }
+                                `PDF, Word, Excel & more · up to ${ maxFiles } file${ maxFiles !== 1 ? "s" : "" } · max ${ formatBytes(maxSize) } each` }
                         </p>
                     </div>
 
@@ -430,12 +430,12 @@ export function FileUploader({
                 <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-[11px] text-muted-foreground">
                         <span>
-                            { validFiles.length } { validFiles.length !== 1 ? "ملفات" : "ملف" }{ " " }
-                            مرفقة
+                            { validFiles.length } file{ validFiles.length !== 1 ? "s" : "" }{ " " }
+                            attached
                         </span>
                         <span>
                             { formatBytes(totalSize) }
-                            { maxFiles > 1 && ` · ${ Math.round(usagePercent) }% من السعة` }
+                            { maxFiles > 1 && ` · ${ Math.round(usagePercent) }% capacity` }
                         </span>
                     </div>
                     <div className="h-1.5 overflow-hidden rounded-full bg-muted">
@@ -464,7 +464,7 @@ export function FileUploader({
             {/* ── Compact add-more when full drop zone is hidden ── */ }
             { !canAdd && files.length > 0 && !disabled && (
                 <p className="text-center text-xs text-muted-foreground">
-                    تم الوصول للحد الأقصى { maxFiles } { maxFiles !== 1 ? "ملفات" : "ملف" }
+                    Maximum of { maxFiles } file{ maxFiles !== 1 ? "s" : "" } reached
                 </p>
             ) }
 
@@ -477,7 +477,7 @@ export function FileUploader({
                     onClick={ () => inputRef.current?.click() }
                 >
                     <PaperclipIcon className="size-3.5" />
-                    إضافة ملف آخر
+                    Add another file
                 </Button>
             ) }
         </div>
@@ -554,7 +554,7 @@ function FileRow({ item, disabled, onRemove }: FileRowProps) {
                         size="icon-sm"
                         className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
                         onClick={ onRemove }
-                        aria-label={ `إزالة ${ item.file.name }` }
+                        aria-label={ `Remove ${ item.file.name }` }
                     >
                         <XIcon className="size-3.5" />
                     </Button>

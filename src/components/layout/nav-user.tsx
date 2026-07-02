@@ -36,7 +36,7 @@ export function NavUser() {
                   <User className="h-4 w-4" />
                 </AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-start text-sm leading-tight">
+              <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
                 <span className="truncate text-xs text-muted-foreground">
                   {user.email}
@@ -51,12 +51,12 @@ export function NavUser() {
             align="end"
             sideOffset={4}
           >
-            <DropdownMenuLabel>حسابي</DropdownMenuLabel>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>الإعدادات</DropdownMenuItem>
-            <DropdownMenuItem>الدعم</DropdownMenuItem>
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>تسجيل الخروج</DropdownMenuItem>
+            <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

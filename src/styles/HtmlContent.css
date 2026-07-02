@@ -29,12 +29,12 @@
 
 .html-content ul {
   list-style-type: disc;
-  padding-inline-start: 1.5em;
+  padding-left: 1.5em;
 }
 
 .html-content ol {
   list-style-type: decimal;
-  padding-inline-start: 1.5em;
+  padding-left: 1.5em;
 }
 
 .html-content li {
@@ -56,9 +56,9 @@
 }
 
 .html-content blockquote {
-  border-inline-start: 3px solid var(--border);
-  padding-inline-start: 1em;
-  margin-inline-start: 0;
+  border-left: 3px solid var(--border);
+  padding-left: 1em;
+  margin-left: 0;
   color: var(--muted-foreground);
   font-style: italic;
 }

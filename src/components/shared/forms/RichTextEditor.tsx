@@ -69,26 +69,26 @@ export interface RichTextEditorProps {
 // ── Constants ────────────────────────────────────────────────────────────────
 
 const TEXT_COLORS = [
-  { label: "افتراضي", value: "unset" },
-  { label: "أحمر", value: "#ef4444" },
-  { label: "برتقالي", value: "#f97316" },
-  { label: "كهرماني", value: "#f59e0b" },
-  { label: "أخضر", value: "#22c55e" },
-  { label: "تركواز", value: "#14b8a6" },
-  { label: "أزرق", value: "#3b82f6" },
-  { label: "بنفسجي", value: "#8b5cf6" },
-  { label: "وردي", value: "#ec4899" },
-  { label: "رمادي", value: "#64748b" },
+  { label: "Default", value: "unset" },
+  { label: "Red", value: "#ef4444" },
+  { label: "Orange", value: "#f97316" },
+  { label: "Amber", value: "#f59e0b" },
+  { label: "Green", value: "#22c55e" },
+  { label: "Teal", value: "#14b8a6" },
+  { label: "Blue", value: "#3b82f6" },
+  { label: "Violet", value: "#8b5cf6" },
+  { label: "Pink", value: "#ec4899" },
+  { label: "Slate", value: "#64748b" },
 ] as const
 
 const HIGHLIGHT_COLORS = [
-  { label: "بدون", value: "" },
-  { label: "أصفر", value: "#fef08a" },
-  { label: "أخضر", value: "#bbf7d0" },
-  { label: "أزرق", value: "#bfdbfe" },
-  { label: "وردي", value: "#fbcfe8" },
-  { label: "برتقالي", value: "#fed7aa" },
-  { label: "بنفسجي", value: "#e9d5ff" },
+  { label: "None", value: "" },
+  { label: "Yellow", value: "#fef08a" },
+  { label: "Green", value: "#bbf7d0" },
+  { label: "Blue", value: "#bfdbfe" },
+  { label: "Pink", value: "#fbcfe8" },
+  { label: "Orange", value: "#fed7aa" },
+  { label: "Purple", value: "#e9d5ff" },
 ] as const
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -134,7 +134,7 @@ export function RichTextEditor({
   name,
   onChange,
   value = "",
-  placeholder = "اكتب شيئًا…",
+  placeholder = "Write something…",
   className,
   disabled = false,
   minHeight = 200,
@@ -185,12 +185,12 @@ export function RichTextEditor({
   })
 
   const currentBlockLabel = state?.isH1
-    ? "عنوان 1"
+    ? "Heading 1"
     : state?.isH2
-      ? "عنوان 2"
+      ? "Heading 2"
       : state?.isH3
-        ? "عنوان 3"
-        : "عناوين"
+        ? "Heading 3"
+        : "Paragraph"
 
   const handleLink = React.useCallback(() => {
     if (!editor) return
@@ -198,7 +198,7 @@ export function RichTextEditor({
       editor.chain().focus().unsetLink().run()
       return
     }
-    const url = window.prompt("أدخل الرابط:")
+    const url = window.prompt("Enter URL:")
     if (url) {
       editor.chain().focus().setLink({ href: url, target: "_blank" }).run()
     }
@@ -221,7 +221,7 @@ export function RichTextEditor({
         .rte-editor .tiptap > * + * { margin-top: 0.5rem; }
         .rte-editor .tiptap p.is-editor-empty:first-child::before {
           content: attr(data-placeholder);
-          float: inline-start;
+          float: left;
           color: var(--muted-foreground);
           pointer-events: none;
           height: 0;
@@ -229,13 +229,13 @@ export function RichTextEditor({
         .rte-editor .tiptap h1 { font-size: 1.5em; font-weight: 700; line-height: 1.3; }
         .rte-editor .tiptap h2 { font-size: 1.25em; font-weight: 600; line-height: 1.3; }
         .rte-editor .tiptap h3 { font-size: 1.125em; font-weight: 600; line-height: 1.3; }
-        .rte-editor .tiptap ul { list-style-type: disc; padding-inline-start: 1.5em; }
-        .rte-editor .tiptap ol { list-style-type: decimal; padding-inline-start: 1.5em; }
+        .rte-editor .tiptap ul { list-style-type: disc; padding-left: 1.5em; }
+        .rte-editor .tiptap ol { list-style-type: decimal; padding-left: 1.5em; }
         .rte-editor .tiptap li + li { margin-top: 0.125em; }
         .rte-editor .tiptap blockquote {
-          border-inline-start: 3px solid var(--border);
-          padding-inline-start: 1em;
-          margin-inline-start: 0;
+          border-left: 3px solid var(--border);
+          padding-left: 1em;
+          margin-left: 0;
           color: var(--muted-foreground);
           font-style: italic;
         }
@@ -292,14 +292,14 @@ export function RichTextEditor({
         >
           {/* Undo / Redo */ }
           <ToolbarButton
-            tooltip="تراجع (⌘Z)"
+            tooltip="Undo (⌘Z)"
             disabled={ disabled || !state?.canUndo }
             onClick={ () => editor.chain().focus().undo().run() }
           >
             <Undo2 />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="إعادة (⌘⇧Z)"
+            tooltip="Redo (⌘⇧Z)"
             disabled={ disabled || !state?.canRedo }
             onClick={ () => editor.chain().focus().redo().run() }
           >
@@ -321,14 +321,14 @@ export function RichTextEditor({
                     className="h-7 w-28 justify-between gap-1 px-2 text-xs font-normal"
                   >
                     <Type className="size-3.5 shrink-0" />
-                    <span className="flex-1 truncate text-start">
+                    <span className="flex-1 truncate text-left">
                       { currentBlockLabel }
                     </span>
                     <ChevronDown className="size-3 shrink-0 opacity-50" />
                   </Button>
                 </DropdownMenuTrigger>
               </TooltipTrigger>
-              <TooltipContent>نمط النص</TooltipContent>
+              <TooltipContent>Text style</TooltipContent>
             </Tooltip>
             <DropdownMenuContent align="start">
               <DropdownMenuItem
@@ -336,7 +336,7 @@ export function RichTextEditor({
                 className="gap-2 text-sm"
               >
                 <Type className="size-4" />
-                فقرة
+                Paragraph
               </DropdownMenuItem>
               <DropdownMenuItem
                 onSelect={ () =>
@@ -347,7 +347,7 @@ export function RichTextEditor({
                 <span className="w-4 text-center text-base font-bold leading-none">
                   H1
                 </span>
-                عنوان 1
+                Heading 1
               </DropdownMenuItem>
               <DropdownMenuItem
                 onSelect={ () =>
@@ -358,7 +358,7 @@ export function RichTextEditor({
                 <span className="w-4 text-center font-bold leading-none">
                   H2
                 </span>
-                عنوان 2
+                Heading 2
               </DropdownMenuItem>
               <DropdownMenuItem
                 onSelect={ () =>
@@ -369,7 +369,7 @@ export function RichTextEditor({
                 <span className="w-4 text-center text-sm font-semibold leading-none">
                   H3
                 </span>
-                عنوان 3
+                Heading 3
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -378,7 +378,7 @@ export function RichTextEditor({
 
           {/* Inline formatting */ }
           <ToolbarButton
-            tooltip="عريض (⌘B)"
+            tooltip="Bold (⌘B)"
             isActive={ state?.isBold }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleBold().run() }
@@ -386,7 +386,7 @@ export function RichTextEditor({
             <Bold />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="مائل (⌘I)"
+            tooltip="Italic (⌘I)"
             isActive={ state?.isItalic }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleItalic().run() }
@@ -394,7 +394,7 @@ export function RichTextEditor({
             <Italic />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="تسطير (⌘U)"
+            tooltip="Underline (⌘U)"
             isActive={ state?.isUnderline }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleUnderline().run() }
@@ -402,7 +402,7 @@ export function RichTextEditor({
             <LucideUnderline />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="يتوسطه خط"
+            tooltip="Strikethrough"
             isActive={ state?.isStrike }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleStrike().run() }
@@ -427,11 +427,11 @@ export function RichTextEditor({
                   </Button>
                 </DropdownMenuTrigger>
               </TooltipTrigger>
-              <TooltipContent>لون النص</TooltipContent>
+              <TooltipContent>Text color</TooltipContent>
             </Tooltip>
             <DropdownMenuContent align="start" className="w-auto min-w-0 p-2.5">
               <p className="mb-2 text-[11px] font-medium text-muted-foreground">
-                لون النص
+                Text color
               </p>
               <div className="grid grid-cols-5 gap-1.5">
                 { TEXT_COLORS.map(({ label, value }) => (
@@ -478,11 +478,11 @@ export function RichTextEditor({
                   </Button>
                 </DropdownMenuTrigger>
               </TooltipTrigger>
-              <TooltipContent>تمييز</TooltipContent>
+              <TooltipContent>Highlight</TooltipContent>
             </Tooltip>
             <DropdownMenuContent align="start" className="w-auto min-w-0 p-2.5">
               <p className="mb-2 text-[11px] font-medium text-muted-foreground">
-                لون التمييز
+                Highlight color
               </p>
               <div className="flex gap-1.5">
                 { HIGHLIGHT_COLORS.map(({ label, value }) => (
@@ -516,7 +516,7 @@ export function RichTextEditor({
 
           {/* Text alignment */ }
           <ToolbarButton
-            tooltip="محاذاة لليمين"
+            tooltip="Align left"
             isActive={ state?.isAlignLeft }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().setTextAlign("left").run() }
@@ -524,7 +524,7 @@ export function RichTextEditor({
             <AlignLeft />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="محاذاة للوسط"
+            tooltip="Align center"
             isActive={ state?.isAlignCenter }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().setTextAlign("center").run() }
@@ -532,7 +532,7 @@ export function RichTextEditor({
             <AlignCenter />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="محاذاة لليسار"
+            tooltip="Align right"
             isActive={ state?.isAlignRight }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().setTextAlign("right").run() }
@@ -540,7 +540,7 @@ export function RichTextEditor({
             <AlignRight />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="ضبط"
+            tooltip="Justify"
             isActive={ state?.isAlignJustify }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().setTextAlign("justify").run() }
@@ -552,7 +552,7 @@ export function RichTextEditor({
 
           {/* Lists */ }
           <ToolbarButton
-            tooltip="قائمة نقطية"
+            tooltip="Bullet list"
             isActive={ state?.isBulletList }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleBulletList().run() }
@@ -560,7 +560,7 @@ export function RichTextEditor({
             <List />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="قائمة مرقّمة"
+            tooltip="Numbered list"
             isActive={ state?.isOrderedList }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleOrderedList().run() }
@@ -572,7 +572,7 @@ export function RichTextEditor({
 
           {/* Block elements */ }
           <ToolbarButton
-            tooltip="اقتباس"
+            tooltip="Blockquote"
             isActive={ state?.isBlockquote }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleBlockquote().run() }
@@ -580,7 +580,7 @@ export function RichTextEditor({
             <Quote />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="كود مضمّن"
+            tooltip="Inline code"
             isActive={ state?.isCode }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleCode().run() }
@@ -588,7 +588,7 @@ export function RichTextEditor({
             <Code />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="كتلة كود"
+            tooltip="Code block"
             isActive={ state?.isCodeBlock }
             disabled={ disabled }
             onClick={ () => editor.chain().focus().toggleCodeBlock().run() }
@@ -596,7 +596,7 @@ export function RichTextEditor({
             <FileCode />
           </ToolbarButton>
           <ToolbarButton
-            tooltip="فاصل"
+            tooltip="Divider"
             disabled={ disabled }
             onClick={ () => editor.chain().focus().setHorizontalRule().run() }
           >
@@ -607,7 +607,7 @@ export function RichTextEditor({
 
           {/* Link */ }
           <ToolbarButton
-            tooltip={ state?.isLink ? "إزالة الرابط" : "إضافة رابط" }
+            tooltip={ state?.isLink ? "Remove link" : "Add link" }
             isActive={ state?.isLink }
             disabled={ disabled }
             onClick={ handleLink }

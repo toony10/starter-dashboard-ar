@@ -15,6 +15,24 @@ const filterPages = [
             "فلتر منسدل يزامن القيمة المحددة مع معاملات البحث في الرابط.",
         href: "/filters/select",
     },
+    {
+        title: "فلتر البحث",
+        description:
+            "بحث نصي يزامن الاستعلام مع معاملات البحث في الرابط.",
+        href: "/filters/search",
+    },
+    {
+        title: "فلتر الحد",
+        description:
+            "فلتر اختيار يزامن حد حجم الصفحة مع معاملات البحث في الرابط.",
+        href: "/filters/limit",
+    },
+    {
+        title: "إعادة تعيين الفلاتر",
+        description:
+            "زر يمسح معاملات البحث المحددة من الرابط.",
+        href: "/filters/reset",
+    },
 ];
 
 export default function FiltersPage() {

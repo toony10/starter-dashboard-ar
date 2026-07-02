@@ -30,7 +30,7 @@ export function SelectFilter({
   paramKey,
   options,
   allOpt = true,
-  placeholder = "اختر خيارًا",
+  placeholder = "Choose an option",
   className,
 }: SelectFilterProps) {
   const [value, setValue] = useQueryState(
@@ -45,6 +45,7 @@ export function SelectFilter({
 
   return (
     <Select
+      key={ `${paramKey}:${value || "__empty__"}` }
       value={ selectValue }
       onValueChange={ (next) => {
         setValue(next === ALL_VALUE ? null : next, {
@@ -57,7 +58,7 @@ export function SelectFilter({
       </SelectTrigger>
       <SelectContent>
         { allOpt ? (
-          <SelectItem value={ ALL_VALUE }>الكل</SelectItem>
+          <SelectItem value={ ALL_VALUE }>All</SelectItem>
         ) : null }
         { options.map((option) => (
           <SelectItem key={ option.value } value={ option.value }>
