@@ -34,6 +34,12 @@ const filterPages = [
         href: "/filters/search",
     },
     {
+        title: "فلتر التاريخ",
+        description:
+            "منتقي تاريخ يزامن التواريخ المحددة مع معاملات البحث في الرابط بصيغة ISO.",
+        href: "/filters/date",
+    },
+    {
         title: "فلتر الحد",
         description:
             "فلتر اختيار يزامن حد حجم الصفحة مع معاملات البحث في الرابط.",

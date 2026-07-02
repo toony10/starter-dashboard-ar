@@ -21,6 +21,12 @@ const formPages = [
       "ارفع المستندات وجداول البيانات والأرشيف مع التحقق وأيقونات أنواع الملفات.",
     href: "/forms/file-uploader",
   },
+  {
+    title: "إدخال التاريخ",
+    description:
+      "منتقي تاريخ بتقويم مع عناصر تحكم اختيارية بالوقت لحقول النماذج ودعم الإرسال الأصلي.",
+    href: "/forms/date-input",
+  },
 ];
 
 export default function FormsPage() {
@@ -28,7 +34,7 @@ export default function FormsPage() {
     <div className="flex flex-col gap-8">
       <MainH
         title="النماذج"
-        description="مكوّنات نماذج قابلة لإعادة الاستخدام للنص الغني والصور ورفع الملفات."
+        description="مكوّنات نماذج قابلة لإعادة الاستخدام للنص الغني والصور ورفع الملفات وإدخال التاريخ والوقت."
       />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         { formPages.map((page) => (

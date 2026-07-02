@@ -41,6 +41,7 @@ export const navigation: NavGroup[] = [
           { title: "محرر النصوص", url: "/forms/rich-text" },
           { title: "رفع الصور", url: "/forms/image-uploader" },
           { title: "رفع الملفات", url: "/forms/file-uploader" },
+          { title: "إدخال التاريخ", url: "/forms/date-input" },
         ],
       },
       {
@@ -52,6 +53,7 @@ export const navigation: NavGroup[] = [
           { title: "فلتر الاختيار", url: "/filters/select" },
           { title: "فلتر الاختيار المتعدد", url: "/filters/multiple-select" },
           { title: "فلتر التبويبات", url: "/filters/tabs" },
+          { title: "فلتر التاريخ", url: "/filters/date" },
           { title: "فلتر البحث", url: "/filters/search" },
           { title: "فلتر الحد", url: "/filters/limit" },
           { title: "إعادة تعيين الفلاتر", url: "/filters/reset" },
