@@ -50,6 +50,8 @@ export const navigation: NavGroup[] = [
         items: [
           { title: "ترقيم الصفحات", url: "/filters/pagination" },
           { title: "فلتر الاختيار", url: "/filters/select" },
+          { title: "فلتر الاختيار المتعدد", url: "/filters/multiple-select" },
+          { title: "فلتر التبويبات", url: "/filters/tabs" },
           { title: "فلتر البحث", url: "/filters/search" },
           { title: "فلتر الحد", url: "/filters/limit" },
           { title: "إعادة تعيين الفلاتر", url: "/filters/reset" },
