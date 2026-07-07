@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation"
 import { SearchFilter } from "@/components/shared/filters/SearchFilter"
 import { MainH, SectionH } from "@/components/shared/text/Headings"
+import { FILTER_URL_UPDATE_DELAY_MS } from "@/config/constants"
 
 function SearchParamsPreview() {
   const searchParams = useSearchParams()
@@ -60,7 +61,7 @@ export default function SearchFilterPage() {
       <section className="flex flex-col gap-3 rounded-lg border bg-muted/30 p-4">
         <SectionH
           title="معاملات البحث الحالية"
-          description="تحديثات الرابط تُؤجّل 600 مللي ثانية بعد كل ضغطة مفتاح."
+          description={`تحديثات الرابط تُؤجّل ${FILTER_URL_UPDATE_DELAY_MS} مللي ثانية بعد كل ضغطة مفتاح.`}
         />
         <SearchParamsPreview />
       </section>
